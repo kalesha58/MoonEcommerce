@@ -1,4 +1,5 @@
 import React from 'react'
+import {NavLink} from "react-router-dom"
 import playStore from "../../../images/playstore.png";
 import appStore from "../../../images/Appstore.png";
 import "./Footer.css"
@@ -13,7 +14,7 @@ const Footer = () => {
           </div>
     
           <div className="midFooter">
-            <h1>Husky Shop.</h1>
+            <h1>Moon Shop.</h1>
             <p>High Quality is our first priority</p>
     
             <p>Copyrights 2023 &copy; MOON</p>
@@ -21,9 +22,10 @@ const Footer = () => {
     
           <div className="rightFooter">
             <h4>Follow Us</h4>
-            <a href="http://instagram.com/">Instagram</a>
-            <a href="http://youtube.com/">Youtube</a>
-            <a href="http://instagram.com/">Facebook</a>
+            <NavLink to="/about">About Us</NavLink>
+            <NavLink to="/contact">Contact Us</NavLink>
+            <NavLink to="/policy">Privacy Policy</NavLink>
+        
           </div>
         </footer>
       );
