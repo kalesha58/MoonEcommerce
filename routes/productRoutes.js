@@ -1,18 +1,23 @@
 import express from "express";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 import formidable from "express-formidable";
-import { createProductController, getProductController } from "../controllers/productCotroller.js";
+import {
+  createProduct,
+  deleteProduct,
+  getProductController,
+  getProductDetails,
+} from "../controllers/productCotroller.js";
 
 const router = express.Router();
 //routes
 router.post(
-    "/create-product",
-    requireSignIn,
-    isAdmin,
-    formidable(),
-    createProductController
-  );
-  
+  "/create-product",
+  requireSignIn,
+  isAdmin,
+
+  createProduct
+);
+
 //routes
 // router.put(
 //     "/update-product/:pid",
@@ -21,7 +26,10 @@ router.post(
 //     formidable(),
 //     updateProductController
 //   );
-  
-  //get products
-  router.get("/get-product", getProductController);
-  export default router;
+
+//get products
+router.get("/get-product", getProductController);
+router.delete("/delete-product/:id", requireSignIn,
+isAdmin, deleteProduct);
+router.get("/product-detials/:id", getProductDetails);
+export default router;
