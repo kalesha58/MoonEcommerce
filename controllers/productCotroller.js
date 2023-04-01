@@ -66,11 +66,25 @@ export const deleteProduct = catchAsyncErrors(async (req, res, next) => {
 // {======================GET-SINGLE-PRODUCT-DETAILS=====================}
 
 export const getProductDetails = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
-
+  const product = await Product.findById(req.params.id).populate("category");
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
   }
+
+  res.status(200).json({
+    success: true,
+    product,
+  });
+});
+// {========================UPDATE-PRODUCT----------ADMIN----------------===================}
+export const updateProduct = catchAsyncErrors(async (req, res, next) => {
+  let product = await Product.findById(req.params.id);
+
+  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
 
   res.status(200).json({
     success: true,

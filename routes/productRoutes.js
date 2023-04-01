@@ -6,6 +6,7 @@ import {
   deleteProduct,
   getProductController,
   getProductDetails,
+  updateProduct,
 } from "../controllers/productCotroller.js";
 
 const router = express.Router();
@@ -29,7 +30,7 @@ router.post(
 
 //get products
 router.get("/get-product", getProductController);
-router.delete("/delete-product/:id", requireSignIn,
-isAdmin, deleteProduct);
+router.delete("/delete-product/:id", requireSignIn, isAdmin, deleteProduct);
 router.get("/product-detials/:id", getProductDetails);
+router.put("/update-product/:id", requireSignIn, isAdmin, updateProduct);
 export default router;
